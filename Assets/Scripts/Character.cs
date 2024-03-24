@@ -7,10 +7,10 @@ using UnityEngine;
 public class Character : Creature
 {
     [SerializeField]
-    private float speed = 3.0F;
+    private float speed = 4.0F;
 
     [SerializeField]
-    private float jumpForce = 10.0F;
+    private float jumpForce = 7.0F;
 
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
@@ -64,11 +64,13 @@ public class Character : Creature
 
     private void Run()
     {
-        Vector3 direction = transform.right * Input.GetAxis("Horizontal");
+        var horizontal = Input.GetAxis("Horizontal");
 
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed * Time.deltaTime);
+        sprite.flipX = horizontal > 0.0F;
 
-        sprite.flipX = direction.x > 0.0F;
+        var direction = sprite.flipX ? 1 : -1;
+
+        rb.velocity = new Vector2(speed * direction, rb.velocity.y);
 
         //if (isGrounded)
         //{
@@ -78,7 +80,7 @@ public class Character : Creature
 
     private void Jump()
     {
-        rb.velocity = Vector2.up * jumpForce;
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
     private void CheckGround()
