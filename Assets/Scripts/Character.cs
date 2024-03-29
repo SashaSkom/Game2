@@ -101,7 +101,7 @@ public class Character : Creature
 
     private void CheckGround()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groudCheck.position, 0.3F);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groudCheck.position, 0.25F);
 
         isGrounded = colliders
             .Where(collider => collider.tag == "Ground")
