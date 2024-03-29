@@ -16,8 +16,10 @@ public class Character : Creature
     private SpriteRenderer sprite;
     private Animator animator;
     public Transform groudCheck;
+    public Transform sideCheck;
 
-    private bool isGrounded = false;
+    public bool isGrounded = false;
+    public bool isClimbing = false;
 
     //private CharState State
     //{
@@ -47,11 +49,16 @@ public class Character : Creature
 
     private void FixedUpdate()
     {
+        CheckClimbing();
         CheckGround();
     }
 
     void Update()
     {
+        if(Input.GetButton("Vertical") && isClimbing)
+        {
+            Climb();
+        }
         if (Input.GetButton("Horizontal"))
         {
             Run();
@@ -83,6 +90,15 @@ public class Character : Creature
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
     }
 
+    private void Climb()
+    {
+        var vertical = Input.GetAxis("Vertical");
+
+        var direction = vertical > 0.0F ? 1 : -1;
+
+        rb.velocity = new Vector2(rb.velocity.x, speed * direction);
+    }
+
     private void CheckGround()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groudCheck.position, 0.3F);
@@ -96,5 +112,15 @@ public class Character : Creature
         //{
         //    State = CharState.Jump;
         //}
+    }
+
+    private void CheckClimbing()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F);
+
+        isClimbing = colliders
+            .Where(collider => collider.tag == "Climbing")
+            .ToArray()
+            .Length > 0;
     }
 }
