@@ -120,7 +120,7 @@ public class Character : Creature
 
     private void Break()
     {
-        if(breakingCount == 5)
+        if(breakingCount == 1)
         {
             breakingCount = 0;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F);
