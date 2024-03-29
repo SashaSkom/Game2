@@ -20,6 +20,10 @@ public class Character : Creature
 
     public bool isGrounded = false;
     public bool isClimbing = false;
+    public bool isBreaking = false;
+    public bool isFalling = false;
+    public bool canHit = true;
+    public int breakingCount = 0;
 
     //private CharState State
     //{
@@ -49,12 +53,22 @@ public class Character : Creature
 
     private void FixedUpdate()
     {
+        CheckFalling();
+        CheckBreakable();
         CheckClimbing();
         CheckGround();
     }
 
     void Update()
     {
+        if(isFalling)
+        {
+            Fall();
+        }
+        if(Input.GetButton("Fire1") && isBreaking && canHit)
+        {
+            Break();
+        }
         if(Input.GetButton("Vertical") && isClimbing)
         {
             Climb();
@@ -99,6 +113,26 @@ public class Character : Creature
         rb.velocity = new Vector2(rb.velocity.x, speed * direction);
     }
 
+    private void Fall()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, -5 * speed);
+    }
+
+    private void Break()
+    {
+        if(breakingCount == 5)
+        {
+            breakingCount = 0;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F);
+            var toDestroy = colliders.Where(collider => collider.tag == "Breakable").First();
+            UnityEngine.Object.Destroy(toDestroy);
+            toDestroy.GetComponent<SpriteRenderer>().enabled = false;
+            return;
+        }
+        breakingCount++;
+        StartCoroutine(damageTimer());
+    }
+
     private void CheckGround()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groudCheck.position, 0.3F);
@@ -122,5 +156,32 @@ public class Character : Creature
             .Where(collider => collider.tag == "Climbing")
             .ToArray()
             .Length > 0;
+    }
+
+    private void CheckBreakable()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F);
+
+        isBreaking = colliders
+            .Where(collider => collider.tag == "Breakable")
+            .ToArray()
+            .Length > 0; 
+    }
+
+    private void CheckFalling()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F);
+
+        isFalling = colliders
+            .Where(collider => collider.tag == "Falling")
+            .ToArray()
+            .Length > 0;
+    }
+
+    private IEnumerator damageTimer()
+    {
+        canHit = false;
+        yield return new WaitForSeconds(1f);
+        canHit = true;
     }
 }
