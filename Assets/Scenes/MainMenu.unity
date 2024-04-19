@@ -171,10 +171,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 16531950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a841a545c74480089a49d310279c47d, type: 3}
+  m_Script: {fileID: 11500000, guid: e9093d4c1e6e42a4a387866c8bff6711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstSelected: {fileID: 711679435}
 --- !u!114 &16531953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,10 +183,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 16531950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4b610d5c688474b86a8ccba61e738c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 7966beabe1244e709700c13473800582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: SampleScene
+  firstSelected: {fileID: 711679435}
 --- !u!1 &46045550
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +605,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 16531953}
+      - m_Target: {fileID: 16531952}
         m_TargetAssemblyTypeName: UI.MainMenu, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1

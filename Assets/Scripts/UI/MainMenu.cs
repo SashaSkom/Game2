@@ -5,11 +5,10 @@ namespace UI
 {
     public class MainMenu: MonoBehaviour
     {
-        public string startScene = "SampleScene";
     
         public void StartGame()
         {
-            SceneManager.LoadScene(startScene);
+            SceneManager.LoadScene(Constants.SceneNames.Level1);
         }
 
         public void QuitGame()
