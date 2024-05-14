@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
+using Environment;
 using UnityEngine;
 
 public class Character : Creature
@@ -26,6 +25,7 @@ public class Character : Creature
     public bool isFalling = false;
     public bool canHit = true;
     public int breakingCount = 0;
+    public bool CanInteract { get; private set; }
 
     //private CharState State
     //{
@@ -58,6 +58,7 @@ public class Character : Creature
 
     private void FixedUpdate()
     {
+        UpdateCanInteract();
         CheckFalling();
         CheckBreakable();
         CheckClimbing();
@@ -73,6 +74,10 @@ public class Character : Creature
         if(Input.GetButton("Fire1") && isBreaking && canHit)
         {
             Break();
+        }
+        if(Input.GetButtonDown("Fire2") && CanInteract) //interaction
+        {
+            Interact();
         }
         if(Input.GetButton("Vertical") && isClimbing && canMove)
         {
@@ -128,9 +133,9 @@ public class Character : Creature
         if(breakingCount == 1)
         {
             breakingCount = 0;
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F);
-            var toDestroy = colliders.Where(collider => collider.tag == "Breakable").First();
-            UnityEngine.Object.Destroy(toDestroy);
+            var colliders = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F);
+            var toDestroy = colliders.First(c => c.CompareTag("Breakable"));
+            Destroy(toDestroy);
             toDestroy.GetComponent<SpriteRenderer>().enabled = false;
             return;
         }
@@ -138,12 +143,19 @@ public class Character : Creature
         StartCoroutine(damageTimer());
     }
 
+    private void Interact()
+    {
+        Debug.Log("Interact");
+        var c = Physics2D.OverlapCircleAll(sideCheck.position, 1F).First(c => c.CompareTag("Interactable"));
+        c.GetComponentInParent<IInteractable>().Interact();
+    }
+
     private void CheckGround()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(groudCheck.position, 0.25F);
 
         isGrounded = colliders
-            .Where(collider => collider.tag == "Ground")
+            .Where(collider => collider.CompareTag("Ground"))
             .ToArray()
             .Length > 0;
 
@@ -198,5 +210,17 @@ public class Character : Creature
     private void DisableMovementsHandler()
     {
         canMove = false;
+    }
+
+    private void UpdateCanInteract()
+    {
+        var c = Physics2D.OverlapCircleAll(sideCheck.position, 1F).Where(c => c.CompareTag("Interactable"));
+        if (!c.Any())
+        {
+            CanInteract = false;
+            return;
+        }
+
+        CanInteract =  c.First().GetComponentInParent<IInteractable>().CanInteract();
     }
 }

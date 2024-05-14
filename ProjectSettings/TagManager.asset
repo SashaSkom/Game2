@@ -8,6 +8,7 @@ TagManager:
   - Climbing
   - Breakable
   - Falling
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Robots
+  - Character
   - 
   - 
   - 
