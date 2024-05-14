@@ -221,6 +221,6 @@ public class Character : Creature
             return;
         }
 
-        CanInteract = true;
+        CanInteract =  c.First().GetComponentInParent<IInteractable>().CanInteract();
     }
 }

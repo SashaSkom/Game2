@@ -7,6 +7,7 @@ namespace Environment
     {
         [SerializeField] private GameObject doorMiniGame;
         [SerializeField] private CharacterEvents characterEvents;
+        [SerializeField] private bool canInteract = true;
 
         private void Start()
         {
@@ -25,6 +26,7 @@ namespace Environment
         {
             doorMiniGame.SetActive(false);
             characterEvents.enableMovements.Invoke();
+            canInteract = true;
         }
 
         public void OnWinGameHandler()
@@ -33,9 +35,15 @@ namespace Environment
             gameObject.SetActive(false);
         }
 
+        public bool CanInteract()
+        {
+            return canInteract;
+        }
+
         public void Interact()
         {
-            if(doorMiniGame.activeSelf) return;
+            if(doorMiniGame.activeSelf || !canInteract) return;
+            canInteract = false;
             StartMiniGame();
         }
     }
