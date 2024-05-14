@@ -8,6 +8,7 @@ TagManager:
   - Climbing
   - Breakable
   - Falling
+  - Interactable
   layers:
   - Default
   - TransparentFX

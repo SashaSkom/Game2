@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Environment
 {
-    public class StationDoor: MonoBehaviour
+    public class StationDoor: MonoBehaviour, IInteractable
     {
         [SerializeField] private GameObject doorMiniGame;
         [SerializeField] private CharacterEvents characterEvents;
@@ -13,11 +13,6 @@ namespace Environment
             var gameEvents = FindObjectOfType<DoorGameEvents>().GetComponent<DoorGameEvents>();
             characterEvents = FindObjectOfType<CharacterEvents>().GetComponent<CharacterEvents>();
             gameEvents.onWinGame.AddListener(OnWinGameHandler);
-        }
-
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            StartMiniGame();
         }
 
         public void StartMiniGame()
@@ -36,6 +31,12 @@ namespace Environment
         {
             EndMiniGame();
             gameObject.SetActive(false);
+        }
+
+        public void Interact()
+        {
+            if(doorMiniGame.activeSelf) return;
+            StartMiniGame();
         }
     }
 }

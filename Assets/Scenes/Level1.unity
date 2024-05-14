@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 181669391}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -411,10 +411,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.18582135, y: 0}
+  m_Offset: {x: 0.0014924258, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -425,7 +425,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3716425, y: 1}
+  m_Size: {x: 0.9970151, y: 1}
   m_EdgeRadius: 0
 --- !u!212 &181669393
 SpriteRenderer:
@@ -2155,7 +2155,7 @@ GameObject:
   - component: {fileID: 745173361}
   m_Layer: 0
   m_Name: Background (5)
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5272,11 +5272,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2284323514589376346, guid: 18f896781d303bc4c81781ad9955e232, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4
+      value: 153.1
       objectReference: {fileID: 0}
     - target: {fileID: 2284323514589376346, guid: 18f896781d303bc4c81781ad9955e232, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2284323514589376346, guid: 18f896781d303bc4c81781ad9955e232, type: 3}
       propertyPath: m_LocalPosition.z
