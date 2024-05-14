@@ -146,7 +146,7 @@ public class Character : Creature
     private void Interact()
     {
         Debug.Log("Interact");
-        var c = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F).First(c => c.CompareTag("Interactable"));
+        var c = Physics2D.OverlapCircleAll(sideCheck.position, 1F).First(c => c.CompareTag("Interactable"));
         c.GetComponentInParent<IInteractable>().Interact();
     }
 
