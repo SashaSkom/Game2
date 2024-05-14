@@ -17,15 +17,15 @@ namespace MiniGames.DoorGame.Tiles
         private readonly Dictionary<Guid, FieldTile> _tiles = new();
         private GridLayoutGroup _gridLayoutGroup;
         private HashSet<Guid> _currentPattern;
-        private GameEvents _gameEvents;
+        private DoorGameEvents _doorGameEvents;
         private int _openTilesCount;
 
         private readonly Random _random = new();
 
         private void Start()
         {
-            _gameEvents = FindObjectOfType<GameEvents>().GetComponent<GameEvents>();
-            _gameEvents.onTileClick.AddListener(OnTileClickHandler);
+            _doorGameEvents = FindObjectOfType<DoorGameEvents>().GetComponent<DoorGameEvents>();
+            _doorGameEvents.onTileClick.AddListener(OnTileClickHandler);
         }
 
         public void Init(int gridSize)
@@ -74,7 +74,7 @@ namespace MiniGames.DoorGame.Tiles
             yield return new WaitForSeconds(0.3f);
             ClearField();
             fieldState = FieldState.Inactive;
-            _gameEvents.onLooseRound.Invoke();
+            _doorGameEvents.onLooseRound.Invoke();
         }
 
         private void ShowPattern(HashSet<Guid> pattern)
@@ -117,7 +117,7 @@ namespace MiniGames.DoorGame.Tiles
                 
                 fieldState = FieldState.Inactive;
                 ClearField();
-                _gameEvents.onWinRound.Invoke();
+                _doorGameEvents.onWinRound.Invoke();
             }
             else
             {
