@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace MiniGames.DoorGame
 {
-    public class GameEvents: MonoBehaviour
+    public class DoorGameEvents: MonoBehaviour
     {
         public UnityEvent<Guid> onTileClick = new();
         public UnityEvent onLooseRound = new();

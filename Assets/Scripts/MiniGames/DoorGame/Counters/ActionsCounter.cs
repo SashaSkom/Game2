@@ -8,13 +8,13 @@ namespace MiniGames.DoorGame.Counters
         [SerializeField] private ActionIndicator actionActionIndicatorPrefab;
         private readonly List<ActionIndicator> _actionIndicators = new();
         private int _actionsCount;
-        private GameEvents _gameEvents;
+        private DoorGameEvents _doorGameEvents;
         
         protected void Start()
         {
-            _gameEvents = FindObjectOfType<GameEvents>().GetComponent<GameEvents>();
-            _gameEvents.onLooseGame.AddListener(Reset);
-            _gameEvents.onWinGame.AddListener(Reset);
+            _doorGameEvents = FindObjectOfType<DoorGameEvents>().GetComponent<DoorGameEvents>();
+            _doorGameEvents.onLooseGame.AddListener(Reset);
+            _doorGameEvents.onWinGame.AddListener(Reset);
         }
 
         public void Init(int maxCount)

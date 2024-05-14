@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 1954434035532014056}
   - component: {fileID: 8899359483184648537}
   - component: {fileID: 8402165437960379753}
+  - component: {fileID: 2663231024052115313}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -206,6 +207,31 @@ MonoBehaviour:
   speed: 3
   jumpForce: 10
   groudCheck: {fileID: 6514407781402868508}
+  sideCheck: {fileID: 0}
+  isGrounded: 0
+  isClimbing: 0
+  isBreaking: 0
+  isFalling: 0
+  canHit: 1
+  breakingCount: 0
+--- !u!114 &2663231024052115313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7172512524565929209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd988c175fb34b1da3b2cb8fac23a29a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableMovements:
+    m_PersistentCalls:
+      m_Calls: []
+  disableMovements:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8817977169943459277
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class Character : Creature
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     private Animator animator;
+    private CharacterEvents characterEvents;
+    private bool canMove = true;
     public Transform groudCheck;
     public Transform sideCheck;
 
@@ -42,6 +44,9 @@ public class Character : Creature
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        characterEvents = GetComponent<CharacterEvents>();
+        characterEvents.enableMovements.AddListener(EnableMovementsHandler);
+        characterEvents.disableMovements.AddListener(DisableMovementsHandler);
         //animator = GetComponent<Animator>();
     }
 
@@ -69,15 +74,15 @@ public class Character : Creature
         {
             Break();
         }
-        if(Input.GetButton("Vertical") && isClimbing)
+        if(Input.GetButton("Vertical") && isClimbing && canMove)
         {
             Climb();
         }
-        if (Input.GetButton("Horizontal"))
+        if (Input.GetButton("Horizontal") && canMove)
         {
             Run();
         }
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && canMove)
         {
             Jump();
         }
@@ -183,5 +188,15 @@ public class Character : Creature
         canHit = false;
         yield return new WaitForSeconds(1f);
         canHit = true;
+    }
+
+    private void EnableMovementsHandler()
+    {
+        canMove = true;
+    }
+
+    private void DisableMovementsHandler()
+    {
+        canMove = false;
     }
 }

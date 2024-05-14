@@ -9,12 +9,12 @@ namespace MiniGames.DoorGame.Tiles
         public Guid Id = Guid.NewGuid();
         
         [SerializeField] private FieldTileColor tileColor;
-        private GameEvents _gameEvents;
+        private DoorGameEvents _doorGameEvents;
         public bool IsOpened { get; private set; }
 
         private void Start()
         {
-            _gameEvents = FindObjectOfType<GameEvents>().GetComponent<GameEvents>();
+            _doorGameEvents = FindObjectOfType<DoorGameEvents>().GetComponent<DoorGameEvents>();
             tileColor = GetComponent<FieldTileColor>();
         }
 
@@ -33,7 +33,7 @@ namespace MiniGames.DoorGame.Tiles
         public void OnPointerClick(PointerEventData eventData)
         {
             if(IsOpened) return;
-            _gameEvents.onTileClick.Invoke(Id);
+            _doorGameEvents.onTileClick.Invoke(Id);
             Debug.Log($"click {Id}");
         }
     }

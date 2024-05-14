@@ -6,7 +6,7 @@ using UnityEngine;
 namespace MiniGames.DoorGame
 {
     [Serializable]
-    public class GameController: MonoBehaviour
+    public class DoorGameController: MonoBehaviour
     {
         [Min(0)] [SerializeField] private int showPatternTimeInSeconds = 5;
         [Range(1, 10)] [SerializeField] private int passwordLength = 4;
@@ -21,7 +21,7 @@ namespace MiniGames.DoorGame
         [SerializeField] private ActionsCounter mistakesCounter;
         [SerializeField] private ActionsCounter correctPatternsCounter;
         
-        private GameEvents _gameEvents;
+        private DoorGameEvents _doorGameEvents;
 
         private void Start()
         {
@@ -29,11 +29,11 @@ namespace MiniGames.DoorGame
             mistakesCounter.Init(allowedMistakesCount);
             correctPatternsCounter.Init(passwordLength);
             
-            _gameEvents = FindObjectOfType<GameEvents>().GetComponent<GameEvents>();
-            _gameEvents.onWinGame.AddListener(OnWinGameHandler);
-            _gameEvents.onLooseGame.AddListener(OnLooseGameHandler);
-            _gameEvents.onLooseRound.AddListener(OnLooseRoundHandler);
-            _gameEvents.onWinRound.AddListener(OnWinRoundHandler);
+            _doorGameEvents = FindObjectOfType<DoorGameEvents>().GetComponent<DoorGameEvents>();
+            _doorGameEvents.onWinGame.AddListener(OnWinGameHandler);
+            _doorGameEvents.onLooseGame.AddListener(OnLooseGameHandler);
+            _doorGameEvents.onLooseRound.AddListener(OnLooseRoundHandler);
+            _doorGameEvents.onWinRound.AddListener(OnWinRoundHandler);
             
         }
         public void StartGame()
@@ -57,7 +57,7 @@ namespace MiniGames.DoorGame
         {
             if (correctAnswersCount == passwordLength-1)
             {
-                _gameEvents.onWinGame.Invoke();
+                _doorGameEvents.onWinGame.Invoke();
             }
             else
             {
@@ -71,7 +71,7 @@ namespace MiniGames.DoorGame
         {
             if (mistakesCount == allowedMistakesCount)
             {
-                _gameEvents.onLooseGame.Invoke();
+                _doorGameEvents.onLooseGame.Invoke();
             }
             else
             {
