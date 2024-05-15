@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Linq;
-using Environment;
 using UnityEngine;
 
 public class Character : Creature
@@ -135,8 +134,8 @@ public class Character : Creature
             breakingCount = 0;
             var colliders = Physics2D.OverlapCircleAll(sideCheck.position, 0.3F);
             var toDestroy = colliders.First(c => c.CompareTag("Breakable"));
-            Destroy(toDestroy);
-            toDestroy.GetComponent<SpriteRenderer>().enabled = false;
+            Destroy(toDestroy.gameObject);
+           // toDestroy.GetComponent<SpriteRenderer>().enabled = false;
             return;
         }
         breakingCount++;
