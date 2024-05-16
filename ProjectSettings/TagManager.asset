@@ -9,6 +9,7 @@ TagManager:
   - Breakable
   - Falling
   - Interactable
+  - FallingTargetPoint
   layers:
   - Default
   - TransparentFX
