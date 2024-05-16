@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MiniGames.Light;
 using TMPro;
 using UnityEngine;
 
@@ -16,9 +17,11 @@ public class Field : MonoBehaviour
   private int _dimensionY = 0;
   private int _solved = 0;
   private Dictionary<int, int> _amountToSolve = new Dictionary<int, int>();
+  private LightGameEvents _lightGameEvents;
 
   void Start()
   {
+    _lightGameEvents = FindObjectOfType<LightGameEvents>().GetComponent<LightGameEvents>();
     _dimensionX = transform.childCount;
     _dimensionY = transform.GetChild(0).transform.childCount;
     _grid = new Tile[_dimensionX, _dimensionY];
@@ -123,6 +126,7 @@ public class Field : MonoBehaviour
           if (_amountToSolve.Keys.Count == 0)
           {
             Debug.Log("GAME COMPLETE");
+            _lightGameEvents.onWinGame.Invoke();
           }
         }
       }
