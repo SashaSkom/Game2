@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform target;
 
+    public bool followPlayer = true;
+
     private void Awake()
     {
         if (!target)
@@ -18,6 +20,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if(!followPlayer) return;
         Vector3 position = target.position;
         position.z = -10.0F;
 
