@@ -18,6 +18,8 @@ namespace Gears
             {
                 if (value == gearsCount) return;
                 gearsCount = value;
+                StaticStorage.GearsCount = value;
+                Debug.Log(StaticStorage.GearsCount);
                 onGearsCountChanged.Invoke();
             }
         }
@@ -36,6 +38,7 @@ namespace Gears
 
         private void Start()
         {
+            gearsCount = StaticStorage.GearsCount;
             onGearCollected.AddListener(OnGearCollectedHandler);
         }
 

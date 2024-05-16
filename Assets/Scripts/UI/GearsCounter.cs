@@ -15,6 +15,7 @@ namespace UI
         {
             gearsController = FindObjectOfType<GearsController>().GetComponent<GearsController>();
             gearsController.onGearsCountChanged.AddListener(OnGearsCountChangedHandler);
+            countText.text = countTextTemplate.Replace(countPlaceholder, StaticStorage.GearsCount.ToString());
         }
 
         private void OnGearsCountChangedHandler()
