@@ -6,7 +6,7 @@ namespace Environment.Robots
 {
     public class Robot: MonoBehaviour, IInteractable
     {
-        public int NeedGearsToRepair { get; private set; } = 4;
+        public int NeedGearsToRepair { get; private set; } = 5;
         public bool isBroken = true;
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Color repairedColor = Color.green;
