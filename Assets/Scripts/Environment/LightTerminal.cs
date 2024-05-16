@@ -13,6 +13,8 @@ namespace Environment
         [SerializeField] private GameObject lightGameUI;
         [SerializeField] private LightGameEvents lightGameEvents;
         [SerializeField] private Character character;
+        [SerializeField] private GameObject stationLight;
+        [SerializeField] private GameObject stationDoor;
 
         private void Start()
         {
@@ -50,6 +52,18 @@ namespace Environment
             cameraController.followPlayer = true;
             characterEvents.enableMovements.Invoke();
             lightGameUI.SetActive(false);
+            OpenSecondDoor();
+            TurnOnLight();
+        }
+
+        private void TurnOnLight()
+        {
+            stationLight.SetActive(true);
+        }
+
+        private void OpenSecondDoor()
+        {
+            stationDoor.SetActive(false);
         }
     }
 }
