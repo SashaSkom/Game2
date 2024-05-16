@@ -11,6 +11,7 @@ namespace Environment.Robots
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private Color repairedColor = Color.green;
         [SerializeField] private float speed = 4f;
+        [SerializeField] private RobotsController robotsController;
 
         [SerializeField] private GearsController gearsController;
         private Rigidbody2D _rigidbody2D;
@@ -19,6 +20,7 @@ namespace Environment.Robots
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
             gearsController = FindObjectOfType<GearsController>().GetComponent<GearsController>();
+            robotsController = FindObjectOfType<RobotsController>().GetComponent<RobotsController>();
             sprite = GetComponent<SpriteRenderer>();
         }
 
@@ -41,6 +43,7 @@ namespace Environment.Robots
             //TODO change sprite
             Debug.Log("Repair");
             sprite.color = repairedColor;
+            robotsController.OnRobotRepaired.Invoke();
             StartCoroutine(MovementsCoroutine());
         }
 
