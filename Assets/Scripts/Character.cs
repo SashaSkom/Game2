@@ -46,7 +46,7 @@ public class Character : Creature
         characterEvents = GetComponent<CharacterEvents>();
         characterEvents.enableMovements.AddListener(EnableMovementsHandler);
         characterEvents.disableMovements.AddListener(DisableMovementsHandler);
-        //animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Start is called before the first frame update
@@ -90,6 +90,8 @@ public class Character : Creature
         {
             Jump();
         }
+
+        animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw("Horizontal")));
     }
 
     private void Run()
@@ -111,6 +113,7 @@ public class Character : Creature
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        animator.Play("Character_Jump");
     }
 
     private void Climb()
