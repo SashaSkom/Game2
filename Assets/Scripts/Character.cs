@@ -123,15 +123,19 @@ public class Character : Creature
         var direction = vertical > 0.0F ? 1 : -1;
 
         rb.velocity = new Vector2(rb.velocity.x, speed * direction);
+
+        animator.Play("Character_Climb");
     }
 
     private void Fall()
     {
         rb.velocity = new Vector2(rb.velocity.x, -5 * speed);
+        animator.Play("Character_Fall");
     }
 
     private void Break()
     {
+      animator.Play("Character_Break");
         if(breakingCount == 1)
         {
             breakingCount = 0;
